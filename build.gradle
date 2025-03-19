@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+}
+
+group = 'cl.tenpo'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '21'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'io.projectreactor', name: 'reactor-core', version: "$reactor"
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: "$lombok"
+    annotationProcessor "org.projectlombok:lombok:$lombok"
+    testImplementation group: 'io.projectreactor', name: 'reactor-test', version: "$reactor"
+
+}
+
+build {
+    doLast {
+        exec {
+            executable "./pre-commit-setup.sh"
+        }
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+build {
+    doLast {
+        exec {
+            executable "./pre-commit-setup.sh"
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
