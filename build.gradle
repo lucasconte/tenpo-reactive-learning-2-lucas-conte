@@ -29,24 +29,8 @@ dependencies {
 
 }
 
-build {
-    doLast {
-        exec {
-            executable "./pre-commit-setup.sh"
-        }
-    }
-}
-
 tasks.named('test') {
     useJUnitPlatform()
-}
-
-build {
-    doLast {
-        exec {
-            executable "./pre-commit-setup.sh"
-        }
-    }
 }
 
 test {
