@@ -1,4 +1,4 @@
-package cl.tenpo.learning.reactive.modules.module2.common;
+package cl.tenpo.learning.reactive.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Subscriber;
