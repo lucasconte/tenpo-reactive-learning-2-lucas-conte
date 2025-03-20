@@ -30,10 +30,6 @@ public class CourseUtils {
         }
     }
 
-    public static void log(String message) {
-        log.info("{} -> {}", Thread.currentThread().getName(), message);
-    }
-
     public static void sleepSeconds(final long seconds) {
         try {
             Thread.sleep(seconds*1000);

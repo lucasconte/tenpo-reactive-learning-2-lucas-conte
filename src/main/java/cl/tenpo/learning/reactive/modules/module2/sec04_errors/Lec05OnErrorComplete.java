@@ -1,21 +1,19 @@
 package cl.tenpo.learning.reactive.modules.module2.sec04_errors;
 
 import cl.tenpo.learning.reactive.utils.CourseUtils;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-public class Lec04OnErrorComplete {
+@Slf4j
+public class Lec05OnErrorComplete {
 
     public static void main(String[] args) {
 
         Mono.just("input")
                 .flatMap(next -> someFunctionThatReturnsError())
-                .doOnError(err -> System.err.println("Emitted onError: " + err.getMessage()))
+                .doOnError(err -> log.error("Emitted onError: {}", err.getMessage()))
                 .onErrorComplete()
-                .subscribe(
-                        next -> System.out.println("Received onNext: " + next),
-                        err -> System.err.println("Received onError: " + err.getMessage()),
-                        () -> System.out.println("Received onComplete")
-                );
+                .subscribe(CourseUtils.subscriber() );
 
         CourseUtils.sleepSeconds(5);
 
