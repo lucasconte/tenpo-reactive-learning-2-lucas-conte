@@ -21,8 +21,10 @@ repositories {
 
 dependencies {
     implementation group: 'io.projectreactor', name: 'reactor-core', version: "$reactor"
+    implementation 'com.github.javafaker:javafaker:1.0.2'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: "$lombok"
     annotationProcessor "org.projectlombok:lombok:$lombok"
+    implementation 'ch.qos.logback:logback-classic:1.4.14' // Para que funcione el logging
     testImplementation group: 'io.projectreactor', name: 'reactor-test', version: "$reactor"
 
 }
