@@ -3,17 +3,14 @@ package cl.tenpo.learning.reactive.modules.module2.sec04_errors;
 import cl.tenpo.learning.reactive.utils.CourseUtils;
 import reactor.core.publisher.Mono;
 
-public class Lec02OnErrorResume {
+public class Lec03OnErrorResume {
 
     public static void main(String[] args) {
 
         Mono.just("Hello")
                 .flatMap(next -> someFunctionThatReturnsError())
                 .onErrorResume(err -> fallbackPublisher())
-                .subscribe(
-                        next -> System.out.println("Received onNext: " + next),
-                        err -> System.err.println("Received onError: " + err.getMessage())
-                );
+                .subscribe(CourseUtils.subscriber());
 
         CourseUtils.sleepSeconds(5);
 

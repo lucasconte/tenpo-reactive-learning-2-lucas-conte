@@ -1,9 +1,11 @@
 package cl.tenpo.learning.reactive.modules.module2.sec03_callbacks;
 
 import cl.tenpo.learning.reactive.utils.CourseUtils;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Signal;
 
+@Slf4j
 public class Lec05OnEach {
 
     public static void main(String[] args) {
@@ -11,11 +13,7 @@ public class Lec05OnEach {
         Mono.just("Hello")
                 .map(next -> next.concat(" World!"))
                 .doOnEach(Lec05OnEach::logOnEach)
-                .subscribe(
-                        next -> System.out.println("Received onNext: " + next),
-                        err -> System.err.println("Received onError: " + err.getMessage()),
-                        () -> System.out.println("Received onComplete")
-                );
+                .subscribe(CourseUtils.subscriber());
 
         CourseUtils.sleepSeconds(5);
 
@@ -23,12 +21,12 @@ public class Lec05OnEach {
 
     private static void logOnEach(Signal<String> signal) {
         if (signal.isOnComplete()) {
-            System.out.println("Signal value is null -> " + signal.get());
-            System.out.println("Emitted onComplete");
+            log.info("Signal value is null -> {}", signal.get());
+            log.info("Emitted onComplete");
         } else if(signal.isOnError()) {
-            System.err.println("Emitted onError " + signal.get());
+            log.error("Emitted onError {}", signal.get());
         } else if(signal.isOnNext()) {
-            System.out.println("Emitted onNext " + signal.get());
+            log.info("Emitted onNext {}", signal.get());
         }
     }
 
