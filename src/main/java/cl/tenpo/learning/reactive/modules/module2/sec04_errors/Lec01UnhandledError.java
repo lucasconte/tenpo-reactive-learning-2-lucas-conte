@@ -1,6 +1,6 @@
 package cl.tenpo.learning.reactive.modules.module2.sec04_errors;
 
-import cl.tenpo.learning.reactive.utils.CourseUtils;
+import cl.tenpo.learning.reactive.utils.ModuleUtils;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
@@ -16,7 +16,7 @@ public class Lec01UnhandledError {
                         next -> log.info("Received onNext: {}", next)
                 );
 
-        CourseUtils.sleepSeconds(5);
+        ModuleUtils.sleepSeconds(5);
 
     }
 

@@ -1,6 +1,6 @@
 package cl.tenpo.learning.reactive.modules.module2.sec04_errors;
 
-import cl.tenpo.learning.reactive.utils.CourseUtils;
+import cl.tenpo.learning.reactive.utils.ModuleUtils;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
@@ -18,7 +18,7 @@ public class Lec06CombiningErrorHandlers {
                 .onErrorMap(IOException.class, err -> new RuntimeException("Error on some function " + err.getMessage(), err))
                 .doOnNext(next -> log.info("Emitted onNext: {}", next))
                 .doOnError(err -> log.error("Emitted onError: {}", err.getMessage()))
-                .subscribe(CourseUtils.subscriber());
+                .subscribe(ModuleUtils.subscriber());
 
     }
 

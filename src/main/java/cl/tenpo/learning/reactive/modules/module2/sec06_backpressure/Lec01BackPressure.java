@@ -1,6 +1,6 @@
 package cl.tenpo.learning.reactive.modules.module2.sec06_backpressure;
 
-import cl.tenpo.learning.reactive.utils.CourseUtils;
+import cl.tenpo.learning.reactive.utils.ModuleUtils;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
@@ -16,7 +16,7 @@ public class Lec01BackPressure {
                     for (int i = 1; i <= 500 && !sink.isCancelled(); i++) {
                         log.info("generating {}", i);
                         sink.next(i);
-                        CourseUtils.sleep(Duration.ofMillis(50));
+                        ModuleUtils.sleep(Duration.ofMillis(50));
                     }
                     sink.complete();
                 })
@@ -35,12 +35,12 @@ public class Lec01BackPressure {
                 .map(Lec01BackPressure::timeConsumingTask)
                 .subscribe();
 
-        CourseUtils.sleepSeconds(60);
+        ModuleUtils.sleepSeconds(60);
     }
 
     private static int timeConsumingTask(int i) {
         log.info("received: {}", i);
-        CourseUtils.sleepSeconds(1);
+        ModuleUtils.sleepSeconds(1);
         return i;
     }
 

@@ -1,6 +1,6 @@
 package cl.tenpo.learning.reactive.modules.module2.sec07_hotNcold;
 
-import cl.tenpo.learning.reactive.utils.CourseUtils;
+import cl.tenpo.learning.reactive.utils.ModuleUtils;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
@@ -12,13 +12,13 @@ public class Lec01ColdPublisher {
         Flux<Integer> numbers = Flux.range(1, 10)
                 .delayElements(Duration.ofSeconds(1));
 
-        numbers.subscribe(CourseUtils.subscriber("Gonza"));
+        numbers.subscribe(ModuleUtils.subscriber("Gonza"));
 
-        CourseUtils.sleepSeconds(3);
+        ModuleUtils.sleepSeconds(3);
 
-        numbers.subscribe(CourseUtils.subscriber("Nico"));
+        numbers.subscribe(ModuleUtils.subscriber("Nico"));
 
-        CourseUtils.sleepSeconds(15);
+        ModuleUtils.sleepSeconds(15);
 
     }
 

@@ -1,6 +1,6 @@
 package cl.tenpo.learning.reactive.modules.module2.sec04_errors;
 
-import cl.tenpo.learning.reactive.utils.CourseUtils;
+import cl.tenpo.learning.reactive.utils.ModuleUtils;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
@@ -13,9 +13,9 @@ public class Lec05OnErrorComplete {
                 .flatMap(next -> someFunctionThatReturnsError())
                 .doOnError(err -> log.error("Emitted onError: {}", err.getMessage()))
                 .onErrorComplete()
-                .subscribe(CourseUtils.subscriber() );
+                .subscribe(ModuleUtils.subscriber());
 
-        CourseUtils.sleepSeconds(5);
+        ModuleUtils.sleepSeconds(5);
 
     }
 

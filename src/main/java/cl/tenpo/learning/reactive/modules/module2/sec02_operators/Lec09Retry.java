@@ -1,6 +1,6 @@
 package cl.tenpo.learning.reactive.modules.module2.sec02_operators;
 
-import cl.tenpo.learning.reactive.utils.CourseUtils;
+import cl.tenpo.learning.reactive.utils.ModuleUtils;
 import reactor.core.publisher.Flux;
 
 public class Lec09Retry {
@@ -10,7 +10,7 @@ public class Lec09Retry {
         Flux.error(new RuntimeException("Api Error!"))
                 .log()
                 .retry(2)
-                .subscribe(CourseUtils.subscriber("retry-sub"));
+                .subscribe(ModuleUtils.subscriber("retry-sub"));
 
     }
 

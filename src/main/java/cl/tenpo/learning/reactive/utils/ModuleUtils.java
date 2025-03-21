@@ -7,7 +7,7 @@ import org.reactivestreams.Subscriber;
 import java.time.Duration;
 
 @Slf4j
-public class CourseUtils {
+public class ModuleUtils {
     private static final Faker faker = Faker.instance();
 
     public static Faker faker() {

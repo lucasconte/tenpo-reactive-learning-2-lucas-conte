@@ -1,6 +1,6 @@
 package cl.tenpo.learning.reactive.modules.module2.sec03_callbacks;
 
-import cl.tenpo.learning.reactive.utils.CourseUtils;
+import cl.tenpo.learning.reactive.utils.ModuleUtils;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Signal;
@@ -13,9 +13,9 @@ public class Lec05OnEach {
         Mono.just("Hello")
                 .map(next -> next.concat(" World!"))
                 .doOnEach(Lec05OnEach::logOnEach)
-                .subscribe(CourseUtils.subscriber());
+                .subscribe(ModuleUtils.subscriber());
 
-        CourseUtils.sleepSeconds(5);
+        ModuleUtils.sleepSeconds(5);
 
     }
 

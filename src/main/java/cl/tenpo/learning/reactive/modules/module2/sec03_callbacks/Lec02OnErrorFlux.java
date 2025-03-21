@@ -1,6 +1,6 @@
 package cl.tenpo.learning.reactive.modules.module2.sec03_callbacks;
 
-import cl.tenpo.learning.reactive.utils.CourseUtils;
+import cl.tenpo.learning.reactive.utils.ModuleUtils;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,9 +15,9 @@ public class Lec02OnErrorFlux {
                 .flatMap(Lec02OnErrorFlux::buildFinalMessage)
                 .doOnNext(next -> log.info("Emitted onNext: {}", next))
                 .doOnError(err -> log.error("Emitted onError: {}", err.getMessage()))
-                .subscribe(CourseUtils.subscriber());
+                .subscribe(ModuleUtils.subscriber());
 
-        CourseUtils.sleepSeconds(5);
+        ModuleUtils.sleepSeconds(5);
 
     }
 

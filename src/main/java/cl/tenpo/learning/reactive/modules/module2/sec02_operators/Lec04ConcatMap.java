@@ -1,6 +1,6 @@
 package cl.tenpo.learning.reactive.modules.module2.sec02_operators;
 
-import cl.tenpo.learning.reactive.utils.CourseUtils;
+import cl.tenpo.learning.reactive.utils.ModuleUtils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -12,15 +12,15 @@ public class Lec04ConcatMap {
 
         Flux.just("Argentina", "Chile", "Perú", "Brasil", "Colombia")
                 .concatMap(country -> getCurrencyByCountry(country)) // Mantiene el orden
-                .subscribe(CourseUtils.subscriber());
+                .subscribe(ModuleUtils.subscriber());
 
-        CourseUtils.sleepSeconds(5);
+        ModuleUtils.sleepSeconds(5);
     }
 
     private static Mono<String> getCurrencyByCountry(String country) {
 
         return Mono.just("Moneda de " + country)
-                .delayElement(Duration.ofMillis(CourseUtils.faker().random().nextInt(100, 1000))); // Retraso aleatorio
+                .delayElement(Duration.ofMillis(ModuleUtils.faker().random().nextInt(100, 1000))); // Retraso aleatorio
 
     }
 

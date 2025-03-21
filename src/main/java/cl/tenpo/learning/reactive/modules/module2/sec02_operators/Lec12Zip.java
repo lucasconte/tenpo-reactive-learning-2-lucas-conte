@@ -1,6 +1,6 @@
 package cl.tenpo.learning.reactive.modules.module2.sec02_operators;
 
-import cl.tenpo.learning.reactive.utils.CourseUtils;
+import cl.tenpo.learning.reactive.utils.ModuleUtils;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
@@ -16,9 +16,9 @@ public class Lec12Zip {
         Mono<String> userInfo = Mono.zip(userName, userAge, userCity)
                 .map(tuple -> "User: " + tuple.getT1() + ", Edad: " + tuple.getT2() + ", Ciudad: " + tuple.getT3());
 
-        userInfo.subscribe(CourseUtils.subscriber());
+        userInfo.subscribe(ModuleUtils.subscriber());
 
-        CourseUtils.sleepSeconds(5);
+        ModuleUtils.sleepSeconds(5);
     }
 
 }
