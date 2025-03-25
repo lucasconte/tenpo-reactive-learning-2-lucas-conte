@@ -1,6 +1,7 @@
 package cl.tenpo.learning.reactive.utils.service;
 
 import cl.tenpo.learning.reactive.utils.ModuleUtils;
+import cl.tenpo.learning.reactive.utils.model.User;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,6 +19,10 @@ public class UserService {
     public Mono<String> findFirstName() {
         return findAllNames()
                 .next();
+    }
+
+    public Mono<User> getUserById(String userId) {
+        return Mono.just(new User(userId, ModuleUtils.faker().name().firstName()));
     }
 
     // simulate DB exists
