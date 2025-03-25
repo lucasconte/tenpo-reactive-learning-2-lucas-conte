@@ -25,6 +25,10 @@ public class UserService {
         return Mono.just(new User(userId, ModuleUtils.faker().name().firstName()));
     }
 
+    public Mono<String> findFirstByName(String name) {
+        return Mono.just(name);
+    }
+
     // simulate DB exists
     public Mono<Boolean> existByName(String name) {
         return Mono.just(name)

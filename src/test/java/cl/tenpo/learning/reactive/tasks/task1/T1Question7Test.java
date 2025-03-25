@@ -15,16 +15,16 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class T1Question10Test {
+public class T1Question7Test {
 
     @InjectMocks
-    private T1Question10 t1Question10;
+    private T1Question7 t1Question7;
 
     @Test
-    @DisplayName("PREGUNTA 10 - Stock Prices")
-    public void question10_uc1_test() {
+    @DisplayName("PREGUNTA 7 - Stock Prices")
+    public void question7_uc1_test() {
 
-            ConnectableFlux<Double> stockPrices = t1Question10.question10();
+            ConnectableFlux<Double> stockPrices = t1Question7.question7();
 
             stockPrices.connect();
 

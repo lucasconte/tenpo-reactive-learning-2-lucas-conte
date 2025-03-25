@@ -6,9 +6,9 @@ import reactor.core.publisher.ConnectableFlux;
 
 @Component
 @RequiredArgsConstructor
-public class T1Question10 {
+public class T1Question7 {
 
-    public ConnectableFlux<Double> question10() {
+    public ConnectableFlux<Double> question7() {
         return null; // TODO: REEMPLAZAR POR RESPUESTA
     }
 

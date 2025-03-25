@@ -17,21 +17,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class T1Question12Test {
+public class T1Question9Test {
 
     @InjectMocks
-    private T1Question12 t1Question12;
+    private T1Question9 t1Question9;
 
     @Mock
     private TransactionService transactionServiceMock;
 
     @Test
-    @DisplayName("PREGUNTA 12 - Transacción autorizada")
-    void question12_uc1_test() {
+    @DisplayName("PREGUNTA 9 - Transacción autorizada")
+    void question9_uc1_test() {
         when(transactionServiceMock.authorizeTransaction(11111))
                 .thenReturn(Mono.just("Autorizado"));
 
-        StepVerifier.create(t1Question12.question12())
+        StepVerifier.create(t1Question9.question9())
                 .expectNext("Autorizado")
                 .verifyComplete();
 
@@ -40,8 +40,8 @@ public class T1Question12Test {
     }
 
     @Test
-    @DisplayName("PREGUNTA 12 - Transacción autorizada - 1 retry")
-    void question12_uc2_test() {
+    @DisplayName("PREGUNTA 9 - Transacción autorizada - 1 retry")
+    void question9_uc2_test() {
         AtomicInteger counter = new AtomicInteger(0);
         when(transactionServiceMock.authorizeTransaction(11111))
                 .thenReturn(Mono.defer(() -> {
@@ -52,7 +52,7 @@ public class T1Question12Test {
                     }
                 }));
 
-        StepVerifier.create(t1Question12.question12())
+        StepVerifier.create(t1Question9.question9())
                 .expectNext("Autorizado")
                 .verifyComplete();
 
@@ -61,11 +61,11 @@ public class T1Question12Test {
     }
 
     @Test
-    @DisplayName("PREGUNTA 12 - Transacción autorizada - service timeout & AuthorizationTimeoutException")
-    void question12_uc3_test() {
+    @DisplayName("PREGUNTA 9 - Transacción autorizada - service timeout & AuthorizationTimeoutException")
+    void question9_uc3_test() {
         when(transactionServiceMock.authorizeTransaction(11111)).thenReturn(Mono.never());
 
-        StepVerifier.create(t1Question12.question12())
+        StepVerifier.create(t1Question9.question9())
                 .expectError(AuthorizationTimeoutException.class)
                 .verify();
 
@@ -74,11 +74,11 @@ public class T1Question12Test {
     }
 
     @Test
-    @DisplayName("PREGUNTA 12 - Transacción autorizada - 3 retries & PaymentProcessingException")
-    void question12_uc4_test() {
+    @DisplayName("PREGUNTA 9 - Transacción autorizada - 3 retries & PaymentProcessingException")
+    void question9_uc4_test() {
         when(transactionServiceMock.authorizeTransaction(11111)).thenReturn(Mono.error(new RuntimeException("Falla crítica")));
 
-        StepVerifier.create(t1Question12.question12())
+        StepVerifier.create(t1Question9.question9())
                 .expectError(PaymentProcessingException.class)
                 .verify();
 

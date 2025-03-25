@@ -9,11 +9,11 @@ import reactor.core.publisher.Mono;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class T1Question12 {
+public class T1Question9 {
 
     private final TransactionService transactionService;
 
-    public Mono<String> question12() {
+    public Mono<String> question9() {
         return null; //TODO: REEMPLAZAR POR RESPUESTA
     }
 }

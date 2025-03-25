@@ -1,6 +1,8 @@
 package cl.tenpo.learning.reactive.tasks.task1;
 
 
+import cl.tenpo.learning.reactive.utils.exception.ResourceNotFoundException;
+import cl.tenpo.learning.reactive.utils.exception.UserServiceException;
 import cl.tenpo.learning.reactive.utils.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -103,6 +105,57 @@ public class T1Question1Test {
 
     }
 
+    @Test
+    @DisplayName("PREGUNTA 1C - El servicio devuelve un registro")
+    public void question1_c_uc1_test() {
+
+        String name = "Juan";
+        when(userServiceMock.findFirstByName(name)).thenReturn(Mono.just(name));
+
+        Mono<String> outputMono = t1Question1.question1C(name);
+
+        StepVerifier.create(outputMono.log())
+                .expectNext(name)
+                .verifyComplete();
+
+        verify(userServiceMock, times(1)).findFirstByName(name);
+        verifyNoMoreInteractions(userServiceMock);
+
+    }
+
+    @Test
+    @DisplayName("PREGUNTA 1C - El servicio devuelve un vacío")
+    public void question1_c_uc2_test() {
+
+        String name = "Juan";
+        when(userServiceMock.findFirstByName(name)).thenReturn(Mono.empty());
+
+        Mono<String> outputMono = t1Question1.question1C(name);
+
+        StepVerifier.create(outputMono.log())
+                .verifyError(ResourceNotFoundException.class);
+
+        verify(userServiceMock, times(1)).findFirstByName(name);
+        verifyNoMoreInteractions(userServiceMock);
+
+    }
+
+    @Test
+    @DisplayName("PREGUNTA 1C - El servicio arroja un error")
+    public void question1_c_uc3_test() {
+
+        String name = "Juan";
+        when(userServiceMock.findFirstByName(name)).thenReturn(Mono.error(new RuntimeException("oops")));
+
+        Mono<String> outputMono = t1Question1.question1C(name);
+
+        StepVerifier.create(outputMono.log())
+                .verifyError(UserServiceException.class);
+
+        verify(userServiceMock, times(1)).findFirstByName(name);
+        verifyNoMoreInteractions(userServiceMock);
+
+    }
 
 
 }

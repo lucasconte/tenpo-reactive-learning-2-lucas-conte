@@ -10,8 +10,13 @@ import java.time.Duration;
 public class CountryService {
 
     public Flux<String> findAllCountries() {
-        return reactor.core.publisher.Flux.interval(Duration.ZERO)
+        return Flux.interval(Duration.ZERO)
                 .map(i -> ModuleUtils.faker().country().name());
+    }
+
+    public Flux<String> findCurrenciesByCountry(String country) {
+        return Flux.range(0, 2)
+                .map(i -> ModuleUtils.faker().country().currencyCode());
     }
 
 }

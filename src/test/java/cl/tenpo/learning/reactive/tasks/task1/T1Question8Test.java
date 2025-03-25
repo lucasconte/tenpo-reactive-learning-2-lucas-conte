@@ -17,10 +17,10 @@ import reactor.test.StepVerifier;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class T1Question11Test {
+public class T1Question8Test {
 
     @InjectMocks
-    private T1Question11 t1Question11;
+    private T1Question8 t1Question8;
 
     @Mock
     private UserService userServiceMock;
@@ -29,8 +29,8 @@ public class T1Question11Test {
     private AccountService accountServiceMock;
 
     @Test
-    @DisplayName("PREGUNTA 11 - User Account")
-    void question11_uc1_test() {
+    @DisplayName("PREGUNTA 8 - User Account")
+    void question8_uc1_test() {
         String userId = "123";
         User user = new User(userId, "Miguel");
         Account account = new Account("ACC-" + userId, userId, 150000.00);
@@ -38,7 +38,7 @@ public class T1Question11Test {
         when(userServiceMock.getUserById(userId)).thenReturn(Mono.just(user));
         when(accountServiceMock.getAccountByUserId(userId)).thenReturn(Mono.just(account));
 
-        Mono<UserAccount> result = t1Question11.question11(userId);
+        Mono<UserAccount> result = t1Question8.question8(userId);
 
         StepVerifier.create(result)
                 .expectSubscription()
