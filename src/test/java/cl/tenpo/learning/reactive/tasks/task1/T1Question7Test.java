@@ -1,18 +1,21 @@
 package cl.tenpo.learning.reactive.tasks.task1;
 
+import cl.tenpo.learning.reactive.utils.model.Account;
+import cl.tenpo.learning.reactive.utils.model.User;
+import cl.tenpo.learning.reactive.utils.model.UserAccount;
+import cl.tenpo.learning.reactive.utils.service.AccountService;
+import cl.tenpo.learning.reactive.utils.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import reactor.core.publisher.ConnectableFlux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class T1Question7Test {
@@ -20,26 +23,36 @@ public class T1Question7Test {
     @InjectMocks
     private T1Question7 t1Question7;
 
+    @Mock
+    private UserService userServiceMock;
+
+    @Mock
+    private AccountService accountServiceMock;
+
     @Test
-    @DisplayName("PREGUNTA 7 - Stock Prices")
-    public void question7_uc1_test() {
+    @DisplayName("PREGUNTA 7 - User Account")
+    void question7_uc1_test() {
+        String userId = "123";
+        User user = new User(userId, "Miguel");
+        Account account = new Account("ACC-" + userId, userId, 150000.00);
 
-            ConnectableFlux<Double> stockPrices = t1Question7.question7();
+        when(userServiceMock.getUserById(userId)).thenReturn(Mono.just(user));
+        when(accountServiceMock.getAccountByUserId(userId)).thenReturn(Mono.just(account));
 
-            stockPrices.connect();
+        Mono<UserAccount> result = t1Question7.question7(userId);
 
-            List<Double> firstSubscriberPrices = new ArrayList<>();
-            stockPrices.subscribe(firstSubscriberPrices::add);
+        StepVerifier.create(result.log())
+                .expectSubscription()
+                .assertNext(accountStatus -> {
+                    assertEquals(userId, accountStatus.user().id());
+                    assertEquals(userId, accountStatus.account().userId());
+                })
+                .verifyComplete();
 
-            StepVerifier.create(stockPrices.delaySubscription(Duration.ofSeconds(2)))
-                    .expectSubscription()
-                    .thenAwait(Duration.ofMillis(500))
-                    .expectNextMatches(price -> price >= 1 && price <= 500)
-                    .expectNextCount(2)
-                    .thenCancel()
-                    .verify();
-
-            assertThat(firstSubscriberPrices).hasSizeGreaterThan(3);
-        }
-
+        verify(userServiceMock, times(1)).getUserById("123");
+        verifyNoMoreInteractions(userServiceMock);
+        verify(accountServiceMock, times(1)).getAccountByUserId("123");
+        verifyNoMoreInteractions(accountServiceMock);
     }
+
+}

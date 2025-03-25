@@ -1,21 +1,19 @@
 package cl.tenpo.learning.reactive.tasks.task1;
 
-
-import cl.tenpo.learning.reactive.utils.model.UserAccount;
-import cl.tenpo.learning.reactive.utils.service.AccountService;
-import cl.tenpo.learning.reactive.utils.service.UserService;
+import cl.tenpo.learning.reactive.utils.service.TransactionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class T1Question8 {
 
-    private final UserService userService;
-    private final AccountService accountService;
+    private final TransactionService transactionService;
 
-    public Mono<UserAccount> question8(String userId) {
+    public Mono<String> question8() {
         return null; //TODO: REEMPLAZAR POR RESPUESTA
     }
 }
