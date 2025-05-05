@@ -32,6 +32,7 @@ dependencies {
     implementation (group: 'org.springframework.boot', name:'spring-boot-starter-data-r2dbc')
     implementation (group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb-reactive')
     implementation (group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis-reactive')
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation (group: 'org.springframework.kafka', name: 'spring-kafka')
     implementation (group: 'io.projectreactor.kafka', name:'reactor-kafka', version: "$kafka")
 
