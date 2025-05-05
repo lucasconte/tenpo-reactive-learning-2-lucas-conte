@@ -44,7 +44,7 @@ spring:
 
 external:
   learning-reactive:
-    base-url: http://localhost:8084/learning-reactive
+    base-url: http://localhost:8083/learning-reactive
     get-percentage:
       method: GET
       url: ${external.learning-reactive.base-url}/external-api/percentage
